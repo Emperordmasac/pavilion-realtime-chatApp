@@ -11,7 +11,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
@@ -30,7 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
- "app/(marketing)/[slug]"  ],
+ "app/(marketing)/[slug]", "tailwind.config.js"  ],
   "exclude": ["node_modules"]
 }
 
