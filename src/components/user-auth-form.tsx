@@ -25,11 +25,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       });
     } finally {
       setIsLoading(false);
-      return toast({
-        title: "Check your email",
-        description:
-          "We sent you a login link. Be sure to check your spam too.",
-      });
     }
   }
 
