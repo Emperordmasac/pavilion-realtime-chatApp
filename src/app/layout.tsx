@@ -1,8 +1,10 @@
 import { Inter as FontSans } from "next/font/google";
 import localFont from "next/font/local";
 
+import { ThemeProvider } from "@/components/theme-provider";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -36,7 +38,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontHeading.variable
         )}
       >
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
