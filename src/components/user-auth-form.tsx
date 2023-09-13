@@ -16,7 +16,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   async function loginWithGoogle() {
     setIsLoading(true);
     try {
-      throw new Error("bullshit");
       await signIn("google");
     } catch (error) {
       return toast({
@@ -26,11 +25,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       });
     } finally {
       setIsLoading(false);
-      // return toast({
-      //   title: "Check your email",
-      //   description:
-      //     "We sent you a login link. Be sure to check your spam too.",
-      // });
+      return toast({
+        title: "Check your email",
+        description:
+          "We sent you a login link. Be sure to check your spam too.",
+      });
     }
   }
 
