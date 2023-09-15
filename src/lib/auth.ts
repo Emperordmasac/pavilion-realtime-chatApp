@@ -1,19 +1,18 @@
 import { NextAuthOptions } from 'next-auth'
 import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter'
-import GoogleProvider from 'next-auth/providers/google'
-
 import { db } from './db'
+import GoogleProvider from 'next-auth/providers/google'
 
 function getGoogleCredentials() {
   const clientId = process.env.GOOGLE_CLIENT_ID
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET
 
   if (!clientId || clientId.length === 0) {
-    throw new Error('MISSING GOOGLE_CLIENT_ID')
+    throw new Error('Missing GOOGLE_CLIENT_ID')
   }
 
   if (!clientSecret || clientSecret.length === 0) {
-    throw new Error('MISSING GOOGLE_CLIENT_SECRET')
+    throw new Error('Missing GOOGLE_CLIENT_SECRET')
   }
 
   return { clientId, clientSecret }
@@ -24,8 +23,9 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
+
   pages: {
-    signIn: '/',
+    signIn: '/login',
   },
   providers: [
     GoogleProvider({
@@ -38,7 +38,10 @@ export const authOptions: NextAuthOptions = {
       const dbUser = (await db.get(`user: ${token.id}`)) as User | null
 
       if (!dbUser) {
-        token.id = user!.id
+        if (user) {
+          token.id = user!.id
+        }
+
         return token
       }
 
